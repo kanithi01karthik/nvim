@@ -1,9 +1,17 @@
 return {
-  { "tahayvr/matteblack.nvim", lazy = false, priority = 1000 },
-  {
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		lazy = false,
+		priority = 1000,
+		opts = {
+			flavour = "mocha",
+		},
+	},
+	{
 		"LazyVim/LazyVim",
 		opts = {
-			colorscheme = "matteblack",
+			colorscheme = "catppuccin",
 		},
 	},
 }

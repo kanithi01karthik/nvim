@@ -14,18 +14,33 @@ return {
 	},
 	config = function(_, opts)
 		require("neo-tree").setup(opts)
-		-- Make neo-tree window transparent with 0.3 opaqueness (70% transparent)
+
+		local function apply_neotree_highlights()
+			local normal = vim.api.nvim_get_hl(0, { name = "Normal", link = false })
+			local normal_nc = vim.api.nvim_get_hl(0, { name = "NormalNC", link = false })
+			local cursorline = vim.api.nvim_get_hl(0, { name = "CursorLine", link = false })
+
+			vim.api.nvim_set_hl(0, "NeoTreeNormal", { fg = normal.fg, bg = "none", ctermbg = "none" })
+			vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { fg = normal_nc.fg or normal.fg, bg = "none", ctermbg = "none" })
+			vim.api.nvim_set_hl(0, "NeoTreeEndOfBuffer", { bg = "none", ctermbg = "none" })
+			vim.api.nvim_set_hl(0, "NeoTreeCursorLine", { bg = cursorline.bg, ctermbg = cursorline.ctermbg })
+		end
+
+		local group = vim.api.nvim_create_augroup("NeoTreeThemeFix", { clear = true })
+
 		vim.api.nvim_create_autocmd("FileType", {
+			group = group,
 			pattern = "neo-tree",
 			callback = function()
-				-- Set window blend to 70 for 70% transparency
-				vim.wo.winblend = 70
-				-- Clear highlights to make transparent
-				vim.cmd("highlight NeoTreeNormal guibg=NONE ctermbg=NONE")
-				vim.cmd("highlight NeoTreeNormalNC guibg=NONE ctermbg=NONE")
-				vim.cmd("highlight NeoTreeEndOfBuffer guibg=NONE ctermbg=NONE")
-				vim.cmd("highlight NeoTreeCursorLine guibg=rgba(255,255,255,0.1) ctermbg=NONE")
+				-- Keep neo-tree text crisp after theme switches.
+				vim.wo.winblend = 0
+				apply_neotree_highlights()
 			end,
+		})
+
+		vim.api.nvim_create_autocmd("ColorScheme", {
+			group = group,
+			callback = apply_neotree_highlights,
 		})
 	end,
 	init = function()

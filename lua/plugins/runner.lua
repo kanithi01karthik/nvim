@@ -9,6 +9,5 @@ return {
 				-- cs  = 'cd $dir && dotnet run',
 			},
 		})
-		vim.keymap.set("n", "<leader>rr", "<cmd>RunCode<CR>")
 	end,
 }

@@ -49,6 +49,13 @@ config.keys = {
 	{ key = "l", mods = "CTRL", action = wezterm.action.ActivatePaneDirection("Next") },
 	{ key = "j", mods = "CTRL", action = wezterm.action.ActivatePaneDirection("Prev") },
 }
+config.mouse_bindings = {
+	{
+		event = { Down = { streak = 1, button = "Middle" } },
+		mods = "NONE",
+		action = wezterm.action.Nop,
+	},
+}
 
 -- UI: pane split border color.
 config.colors = {
