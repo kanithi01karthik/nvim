@@ -90,13 +90,8 @@ vim.keymap.set("n", "<leader>cp", function()
   vim.cmd('call copilot#Accept("\\<Tab>")')
 end, { desc = "Accept Copilot suggestion", silent = true })
 
--- Copilot Chat
-vim.keymap.set("n", "<leader>cc", "<cmd>CopilotChatToggle<cr>", { desc = "Toggle Copilot Chat" })
-vim.keymap.set("n", "<leader>cq", function()
-  local input = vim.fn.input("Quick Chat: ")
-  if input ~= "" then
-    require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
-  end
-end, { desc = "Copilot Chat - Quick Chat" })
-vim.keymap.set("n", "<leader>cce", "<cmd>CopilotChatExplain<cr>", { desc = "Copilot Chat - Explain code" })
+-- Antigravity Chat
+vim.keymap.set("n", "<leader>cc", function()
+  require("utils.antigravity").toggle_antigravity_chat()
+end, { silent = true, desc = "Toggle Antigravity Chat" })
 
