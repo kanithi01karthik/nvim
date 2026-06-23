@@ -37,7 +37,7 @@ vim.keymap.set("v", "<S-A-k>", ":t '<-1<CR>gv=gv", { desc = "Copy selection up" 
 -- LazyVim already maps core Telescope finders.
 -- Only add the custom ast-grep picker here.
 vim.keymap.set("n", "<leader>sg", function()
-    require("telescope.builtin").live_grep()
+	require("telescope.builtin").live_grep()
 end, { desc = "Search text in files" })
 local telescope = require("utils.telescope")
 vim.keymap.set("n", "<leader>ag", telescope.extension("ast_grep", "ast_grep"), { desc = "Telescope ast-grep" })
@@ -74,24 +74,23 @@ vim.keymap.set("n", "<leader>rr", "<cmd>w<CR><cmd>RunCode<CR>", { desc = "Save a
 -- Copilot
 vim.keymap.set("i", "<C-J>", 'copilot#Accept("\\<Tab>")', { expr = true, replace_keycodes = false, silent = true })
 vim.keymap.set("n", "<leader>ct", function()
-  if vim.g.copilot_enabled == nil then
-    vim.g.copilot_enabled = true
-  end
-  if vim.g.copilot_enabled then
-    vim.cmd("Copilot disable")
-  else
-    vim.cmd("Copilot enable")
-  end
-  vim.cmd("Copilot status")
+	if vim.g.copilot_enabled == nil then
+		vim.g.copilot_enabled = true
+	end
+	if vim.g.copilot_enabled then
+		vim.cmd("Copilot disable")
+	else
+		vim.cmd("Copilot enable")
+	end
+	vim.cmd("Copilot status")
 end, { silent = true, desc = "Toggle Copilot" })
 vim.keymap.set("i", "<leader>cp", 'copilot#Accept("\\<Tab>")', { expr = true, replace_keycodes = false, silent = true })
 vim.keymap.set("n", "<leader>cp", function()
-  vim.cmd("startinsert")
-  vim.cmd('call copilot#Accept("\\<Tab>")')
+	vim.cmd("startinsert")
+	vim.cmd('call copilot#Accept("\\<Tab>")')
 end, { desc = "Accept Copilot suggestion", silent = true })
 
 -- Antigravity Chat
-vim.keymap.set("n", "<leader>cc", function()
-  require("utils.antigravity").toggle_antigravity_chat()
+vim.keymap.set("n", "<leader>ac", function()
+	require("utils.antigravity").toggle_antigravity_chat()
 end, { silent = true, desc = "Toggle Antigravity Chat" })
-
