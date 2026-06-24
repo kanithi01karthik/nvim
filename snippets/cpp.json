@@ -1,0 +1,53 @@
+{
+  "solven": {
+    "prefix": "solven",
+    "body": [
+      "#include <bits/stdc++.h>",
+      "using namespace std;",
+      "using ll = long long;",
+      "using vi = vector<int>;",
+      "using vll = vector<long long>;",
+      "#define f(i, a, n) for (ll i = a; i < n; i++)",
+      "#define iv(v, n)                                                               \\",
+      "  vector<ll> v(n);                                                             \\",
+      "  f(i, 0, n) cin >> v[i]",
+      "#define nline '\\n'",
+      "",
+      "void solve() {}",
+      "",
+      "",
+      "int main() {",
+      "  ios::sync_with_stdio(false);",
+      "  cin.tie(nullptr);",
+      "  cout.tie(nullptr);",
+      "  int t;",
+      "  cin >> t;",
+      "  while (t--) {",
+      "    solve();",
+      "  }",
+      "  return 0;",
+      "}"
+    ]
+  },
+  "solve": {
+    "prefix": "solve",
+    "body": [
+      "#include <bits/stdc++.h>",
+      "using namespace std;",
+      "using ll = long long;",
+      "using vi = vector<int>;",
+      "using vll = vector<long long>;",
+      "#define f(i, a, n) for (ll i = a; i < n; i++)",
+      "#define iv(v, n)                                                               \\",
+      "  vector<ll> v(n);                                                             \\",
+      "  f(i, 0, n) cin >> v[i]",
+      "#define nline '\\n'",
+      "int main() {",
+      "  ios::sync_with_stdio(false);",
+      "  cin.tie(nullptr);",
+      "  cout.tie(nullptr);",
+      "  return 0;",
+      "}"
+    ]
+  } 
+}

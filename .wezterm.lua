@@ -6,6 +6,9 @@ local config = wezterm.config_builder()
 config.window_close_confirmation = "NeverPrompt"
 -- Use zsh as the login shell.
 config.default_prog = { "zsh", "-l" }
+config.set_environment_variables = {
+	NVIM_NOTTYFAST = "1",
+}
 
 -- UI: typography scale.
 config.font_size = 14
