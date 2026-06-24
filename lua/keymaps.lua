@@ -70,6 +70,13 @@ vim.keymap.set("v", "<leader>oo", ":Gen<CR>", { desc = "Ollama chat (selection)"
 
 -- Code Runner
 vim.keymap.set("n", "<leader>rr", "<cmd>w<CR><cmd>RunCode<CR>", { desc = "Save and run code" })
+vim.keymap.set("n", "<leader>rt", function()
+	if _G.toggle_code_runner_mode then
+		_G.toggle_code_runner_mode()
+	else
+		vim.notify("Code Runner is not initialized yet", vim.log.levels.WARN)
+	end
+end, { silent = true, desc = "Toggle Code Runner mode" })
 
 -- Copilot
 vim.keymap.set("i", "<C-J>", 'copilot#Accept("\\<Tab>")', { expr = true, replace_keycodes = false, silent = true })

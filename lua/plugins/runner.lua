@@ -6,6 +6,7 @@ return {
 		local output_buf = nil
 		local input_win = nil
 		local output_win = nil
+		local runner_mode = "buffer" -- default mode
 
 		local function clean_old_buffers()
 			for _, buf in ipairs(vim.api.nvim_list_bufs()) do
@@ -176,6 +177,35 @@ return {
 			end, { buffer = input_buf, silent = true, desc = "Execute runner with input" })
 		end
 
+		local function run_in_wezterm(cmd)
+			local wez_cmd = string.format(
+				"wezterm cli split-pane --bottom --percent 30 -- sh -c %s",
+				vim.fn.shellescape(cmd .. "; echo; echo 'Press Enter to exit...'; read REPLY")
+			)
+			vim.fn.jobstart(wez_cmd)
+		end
+
+		local function run_code(cmd)
+			if runner_mode == "terminal" then
+				vim.cmd("silent! write")
+				run_in_wezterm(cmd)
+			else
+				run_with_buffers(cmd)
+			end
+		end
+
+		local function toggle_mode()
+			if runner_mode == "buffer" then
+				runner_mode = "terminal"
+				vim.notify("Code Runner Mode: Terminal (Interactive)", vim.log.levels.INFO)
+			else
+				runner_mode = "buffer"
+				vim.notify("Code Runner Mode: Buffer (I/O splits)", vim.log.levels.INFO)
+			end
+		end
+
+		_G.toggle_code_runner_mode = toggle_mode
+
 		require("code_runner").setup({
 			filetype = {
 				c = function()
@@ -189,7 +219,7 @@ return {
 						vim.fn.shellescape(fileNameWithoutExt),
 						vim.fn.shellescape(fileNameWithoutExt)
 					)
-					run_with_buffers(cmd)
+					run_code(cmd)
 				end,
 				cpp = function()
 					local dir = vim.fn.expand("%:p:h")
@@ -202,14 +232,14 @@ return {
 						vim.fn.shellescape(fileNameWithoutExt),
 						vim.fn.shellescape(fileNameWithoutExt)
 					)
-					run_with_buffers(cmd)
+					run_code(cmd)
 				end,
 				py = function()
 					local dir = vim.fn.expand("%:p:h")
 					local fileName = vim.fn.expand("%:t")
 					local cmd =
 						string.format("cd %s && python3 %s", vim.fn.shellescape(dir), vim.fn.shellescape(fileName))
-					run_with_buffers(cmd)
+					run_code(cmd)
 				end,
 			},
 		})

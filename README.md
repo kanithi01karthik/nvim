@@ -145,22 +145,35 @@ Wraps the Google Antigravity CLI (`agy`) inside a native WezTerm split pane on t
 
 ---
 
-### Input/Output Buffer Code Runner
+### Dual-Mode Code Runner
 
-**File:** `lua/plugins/runner.lua`
+**File:** [runner.lua](file:///home/karthik-kanithi/.config/nvim/lua/plugins/runner.lua)
 
-Configures the `code_runner.nvim` plugin to run C, C++, and Python files with a custom horizontal split at the bottom containing two side-by-side buffers: `[Input]` (left) and `[Output]` (right).
+Configures the `code_runner.nvim` plugin to run C, C++, and Python files using one of two execution pipelines. You can toggle between these modes at any time by pressing `<leader>rt`.
 
-#### How It Works
+#### 1. Buffer I/O Mode (Default)
+Useful for writing code with copy-pasted or predefined inputs without spawning external windows.
 
-1. Press `<leader>rr` in a source file.
-2. The current file is automatically saved.
-3. Two scratch buffers are opened at the bottom:
-   - `[Input]` pane on the left (height: 12 lines) where you can type or paste program inputs.
-   - `[Output]` pane on the right.
-4. Paste/type your inputs in the `[Input]` pane, then press `<CR>` (Enter) in Normal Mode to run.
-5. The output streams in real-time to the `[Output]` pane and auto-scrolls to the end.
-6. Press `q` in Normal Mode on either pane to instantly terminate the job and close both buffers.
+- **How It Works**:
+  1. Press `<leader>rr` in a source file.
+  2. The current file is automatically saved.
+  3. Two scratch buffers are opened at the bottom:
+     - `[Input]` pane on the left (height: 12 lines) where you can type or paste program inputs.
+     - `[Output]` pane on the right.
+  4. Paste/type your inputs in the `[Input]` pane, then press `<CR>` (Enter) in Normal Mode to run.
+  5. The output streams in real-time to the `[Output]` pane and auto-scrolls to the end.
+  6. Press `q` in Normal Mode on either pane to instantly terminate the job and close both buffers.
+
+#### 2. Terminal Mode (Interactive)
+Useful for interactive code execution (e.g., standard input prompting via terminal prompts) or running scripts that require full terminal emulation.
+
+- **How It Works**:
+  1. Toggle to Terminal Mode with `<leader>rt`.
+  2. Press `<leader>rr` in a source file.
+  3. The current file is automatically saved.
+  4. WezTerm opens a native bottom split pane (30% height) executing the program interactively.
+  5. Interactive terminal prompts (`std::cin`, `scanf`, `input()`, etc.) work natively.
+  6. Press `Enter` in the terminal pane to close it when execution finishes.
 
 #### Compiler Pipelines
 
@@ -227,7 +240,8 @@ Copilot's default `<Tab>` mapping is disabled; use `<C-J>` to accept suggestions
 
 | Key          | Mode   | Action                                   |
 | ------------ | ------ | ---------------------------------------- |
-| `<leader>rr` | Normal | Save and run code (Input/Output buffers) |
+| `<leader>rr` | Normal | Save and run code (using current mode)   |
+| `<leader>rt` | Normal | Toggle Code Runner mode (Buffer/Terminal)|
 
 ### Debugging (!!WIP!)
 
