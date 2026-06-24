@@ -62,7 +62,9 @@ return {
 			-- Auto-close linking: closing either buffer/window will close the other side together
 			local is_closing = false
 			local function close_both()
-				if is_closing then return end
+				if is_closing then
+					return
+				end
 				is_closing = true
 				if active_job_id then
 					pcall(vim.fn.jobstop, active_job_id)
@@ -124,8 +126,12 @@ return {
 
 				-- Streaming function to append output in real-time
 				local function append_output(_, data)
-					if not data or #data == 0 then return end
-					if not vim.api.nvim_buf_is_valid(output_buf) then return end
+					if not data or #data == 0 then
+						return
+					end
+					if not vim.api.nvim_buf_is_valid(output_buf) then
+						return
+					end
 
 					local current_lines = vim.api.nvim_buf_get_lines(output_buf, 0, -1, false)
 					if not initialized then
@@ -201,11 +207,8 @@ return {
 				py = function()
 					local dir = vim.fn.expand("%:p:h")
 					local fileName = vim.fn.expand("%:t")
-					local cmd = string.format(
-						"cd %s && python3 %s",
-						vim.fn.shellescape(dir),
-						vim.fn.shellescape(fileName)
-					)
+					local cmd =
+						string.format("cd %s && python3 %s", vim.fn.shellescape(dir), vim.fn.shellescape(fileName))
 					run_with_buffers(cmd)
 				end,
 			},
