@@ -14,6 +14,11 @@ function M.with_module(module, action, missing_message)
 end
 
 
+function M.with_dap(action)
+    return M.with_module('dap', action, 'nvim-dap is not available')
+end
+
+
 function M.with_conform(action)
     return M.with_module('conform', action, 'conform is not available')
 end
