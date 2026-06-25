@@ -10,8 +10,7 @@ A personal Neovim configuration built on top of [LazyVim](https://www.lazyvim.or
 - [Plugin Reference](#plugin-reference)
 - [Custom Integrations](#custom-integrations)
   - [Antigravity Chat Sidepane](#antigravity-chat-sidepane)
-  - [Dual-Mode Code Runner](#dual-mode-code-runner)
-  - [Debugger Pipeline](#debugger-pipeline)
+  - [Input/Output Buffer Code Runner](#inputoutput-buffer-code-runner)
   - [AI Autocompletion (Copilot + Ollama)](#ai-autocompletion-copilot--ollama)
 - [Keybinding Reference](#keybinding-reference)
 - [WezTerm Configuration](#wezterm-configuration)
@@ -56,7 +55,7 @@ A personal Neovim configuration built on top of [LazyVim](https://www.lazyvim.or
     │   ├── autopairs.lua      # Auto-close brackets/quotes
     │   ├── conform.lua        # Code formatting (stylua, prettierd, clang-format)
     │   ├── copilot.lua        # GitHub Copilot ghost-text completions
-    │   ├── debug.lua          # Debugger pipeline configuration
+    │   ├── dap.lua            # DAP Debugger configuration
     │   ├── fzf-lua.lua        # Fuzzy finder (custom fzf binary path)
     │   ├── lint.lua           # Async linting (eslint_d)
     │   ├── live-server.nvim.lua # Live web server preview
@@ -64,7 +63,7 @@ A personal Neovim configuration built on top of [LazyVim](https://www.lazyvim.or
     │   ├── lualine.lua        # Statusline
     │   ├── neo-tree.lua       # File explorer with transparent background
     │   ├── ollama.lua         # Local AI via Ollama (gen.nvim + minuet-ai)
-    │   ├── runner.lua         # Dual-mode (buffer/terminal) code runner
+    │   ├── runner.lua         # Input/Output buffer-based code runner
     │   ├── telescope.lua      # Telescope + ast-grep extension
     │   ├── theme.lua          # Catppuccin Mocha colorscheme
     │   ├── treesitter.lua     # Syntax highlighting
@@ -117,10 +116,7 @@ Bootstraps [lazy.nvim](https://github.com/folke/lazy.nvim) from GitHub, imports 
 | `nvim-neo-tree/neo-tree.nvim`     | `neo-tree.lua`         | File explorer (transparent bg, auto-open on dirs)            |
 | `David-Kunz/gen.nvim`             | `ollama.lua`           | Ollama chat (qwen2.5-coder:7b)                               |
 | `milanglacier/minuet-ai.nvim`     | `ollama.lua`           | Ollama inline completions                                    |
-| `CRAG666/code_runner.nvim`        | `runner.lua`           | Dual-mode (buffer/terminal) code execution                   |
-| `jay-babu/mason-nvim-dap.nvim`    | `debug.lua`            | Auto-install debug adapters (JS, Python, Java, C/C++)         |
-| `rcarriga/nvim-dap-ui`            | `debug.lua`            | UI interface layout for nvim-dap                             |
-| `mfussenegger/nvim-dap`           | `debug.lua`            | Core DAP client and compiler configurations                  |
+| `CRAG666/code_runner.nvim`        | `runner.lua`           | Input/Output buffer-based code execution                     |
 | `nvim-telescope/telescope.nvim`   | `telescope.lua`        | Fuzzy finder + ast-grep extension                            |
 | `catppuccin/nvim`                 | `theme.lua`            | Catppuccin Mocha colorscheme                                 |
 | `nvim-treesitter/nvim-treesitter` | `treesitter.lua`       | Syntax highlighting / parsing                                |
@@ -190,23 +186,6 @@ Useful for interactive code execution (e.g., standard input prompting via termin
 
 ---
 
-### Debugger Pipeline
-
-**File:** [debug.lua](file:///home/karthik-kanithi/.config/nvim/lua/plugins/debug.lua)
-
-Configures the Neovim debugging environment via `nvim-dap`, `mason-nvim-dap.nvim`, and `nvim-dap-ui` for seamless automated debug adapter management and a visual debug layout.
-
-#### Features
-- **Auto-Installation**: Automatically downloads and installs debug adapters for Python, JS/TS, C/C++/Rust, and Java via Mason.
-- **Automated UI**: `nvim-dap-ui` automatically opens when a debugger session starts (`attach`/`launch`) and closes when terminated or exited.
-- **Language Configurations**:
-  - **JS/TS**: Configured using `js-debug-adapter` (adapter `pwa-node`) to launch scripts.
-  - **Python**: Integrated with `debugpy` pointing to the virtualenv python runner.
-  - **Java**: Runs with `java-debug-adapter` to attach to JVM (`:5005`) or launch Java main classes.
-  - **C/C++/Rust**: Configured with `codelldb` to launch compiled binaries.
-
----
-
 ### AI Autocompletion (Copilot + Ollama)
 
 A hybrid setup combining cloud and local AI:
@@ -265,11 +244,20 @@ Copilot's default `<Tab>` mapping is disabled; use `<C-J>` to accept suggestions
 | `<leader>rr` | Normal | Save and run code (using current mode)   |
 | `<leader>rt` | Normal | Toggle Code Runner mode (Buffer/Terminal)|
 
-### Debugging (!!WIP!)
+### Debugging
 
-| Key          | Mode   | Action                        |
-| ------------ | ------ | ----------------------------- |
-| `<leader>kk` | Normal | Capture raw key bytes (debug) |
+| Key          | Mode   | Action                                     |
+| ------------ | ------ | ------------------------------------------ |
+| `<leader>db` | Normal | Toggle breakpoint                          |
+| `<leader>dB` | Normal | Set conditional breakpoint                 |
+| `<leader>dc` | Normal | Continue / Start debugging session         |
+| `<leader>di` | Normal | Step Into                                  |
+| `<leader>do` | Normal | Step Over                                  |
+| `<leader>dO` | Normal | Step Out                                   |
+| `<leader>dt` | Normal | Terminate debug session                    |
+| `<leader>du` | Normal | Toggle DAP UI panel layout                 |
+| `<leader>de` | Normal | Evaluate variable expression under cursor  |
+| `<leader>kk` | Normal | Capture raw key bytes (debug utility)       |
 
 ### Mouse
 

@@ -101,3 +101,15 @@ end, { desc = "Accept Copilot suggestion", silent = true })
 vim.keymap.set("n", "<leader>ac", function()
 	require("utils.antigravity").toggle_antigravity_chat()
 end, { silent = true, desc = "Toggle Antigravity Chat" })
+
+-- ╭─────────────────────────────────────╮
+-- │       Shortcuts from mu-vim         │
+-- ╰─────────────────────────────────────╯
+vim.keymap.set("n", "<leader>nh", ":nohlsearch<CR>", { desc = "Clear search highlight", silent = true })
+vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically", silent = true })
+vim.keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally", silent = true })
+vim.keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size", silent = true })
+vim.keymap.set("n", "<leader>sx", ":close<CR>", { desc = "Close current split", silent = true })
+vim.keymap.set("v", "<", "<gv", { desc = "Indent block left", silent = true })
+vim.keymap.set("v", ">", ">gv", { desc = "Indent block right", silent = true })
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode", silent = true })
