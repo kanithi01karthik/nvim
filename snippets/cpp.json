@@ -49,5 +49,10 @@
       "  return 0;",
       "}"
     ]
-  } 
+  },
+  "head": {
+    "prefix": "head",
+    "body": ["#include <bits/stdc++.h>", "using namespace std;"]
+  }
 }
+
