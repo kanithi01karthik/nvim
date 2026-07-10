@@ -60,10 +60,27 @@ return {
 				cssls = {},
 				emmet_language_server = {
 					filetypes = { "html", "css" },
+					init_options = {
+						showSuggestionsAsSnippets = true,
+					},
 				},
 				ts_ls = {},
 				eslint = {},
-				clangd = {},
+				clangd = {
+					keys = {
+						{ "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
+					},
+					capabilities = {
+						offsetEncoding = { "utf-16" },
+					},
+					cmd = {
+						"clangd",
+						"--background-index",
+						"--clang-tidy",
+						"--header-insertion=never",
+						"--fallback-style=llvm",
+					},
+				},
 
 				-- ast_grep with custom root_dir (require deferred to avoid eager load at spec-parse time)
 				ast_grep = {

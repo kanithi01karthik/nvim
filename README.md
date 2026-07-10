@@ -53,6 +53,7 @@ A personal Neovim configuration built on top of [LazyVim](https://www.lazyvim.or
     │   └── lazy.lua           # Lazy.nvim bootstrap & plugin spec loading
     ├── plugins/
     │   ├── autopairs.lua      # Auto-close brackets/quotes
+    │   ├── cloak.lua          # Mask API keys & secrets in files (.env)
     │   ├── conform.lua        # Code formatting (stylua, prettierd, clang-format)
     │   ├── copilot.lua        # GitHub Copilot ghost-text completions
     │   ├── dap.lua            # DAP Debugger configuration
@@ -106,6 +107,7 @@ Bootstraps [lazy.nvim](https://github.com/folke/lazy.nvim) from GitHub, imports 
 | Plugin                            | File                   | Purpose                                                      |
 | --------------------------------- | ---------------------- | ------------------------------------------------------------ |
 | `windwp/nvim-autopairs`           | `autopairs.lua`        | Auto-close brackets, quotes, tags                            |
+| `laytan/cloak.nvim`               | `cloak.lua`            | Mask API keys & secrets in files (.env)                      |
 | `stevearc/conform.nvim`           | `conform.lua`          | Formatting: stylua, prettierd, clang-format                  |
 | `github/copilot.vim`              | `copilot.lua`          | Inline AI ghost-text completions                             |
 | `ibhagwan/fzf-lua`                | `fzf-lua.lua`          | Fuzzy finder with custom fzf binary                          |
@@ -225,6 +227,7 @@ Copilot's default `<Tab>` mapping is disabled; use `<C-J>` to accept suggestions
 | ------------ | ------ | ----------------------------- |
 | `<leader>sg` | Normal | Live grep (Telescope)         |
 | `<leader>ag` | Normal | AST-grep search (Telescope)   |
+| `<leader>ch` | Normal | Switch Source/Header (C/C++)  |
 | `<C-n>`      | Normal | Toggle Neo-tree file explorer |
 
 ### AI & Chat
