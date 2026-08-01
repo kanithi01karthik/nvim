@@ -112,6 +112,7 @@ Bootstraps [lazy.nvim](https://github.com/folke/lazy.nvim) from GitHub, imports 
 | `github/copilot.vim`              | `copilot.lua`          | Inline AI ghost-text completions                             |
 | `ibhagwan/fzf-lua`                | `fzf-lua.lua`          | Fuzzy finder with custom fzf binary                          |
 | `benlubas/molten-nvim`            | `molten.lua`           | Jupyter Notebook support with inline image rendering         |
+| `goerz/jupytext.vim`              | `jupytext.lua`         | Transparent .ipynb conversion for editing with Molten        |
 | `3rd/image.nvim`                  | `image.lua`            | Inline image rendering using WezTerm Kitty protocol          |
 | `mfussenegger/nvim-lint`          | `lint.lua`             | Async linting with eslint_d                                  |
 | `barrettruth/live-server.nvim`    | `live-server.nvim.lua` | Live web development preview                                 |
