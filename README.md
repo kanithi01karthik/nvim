@@ -92,7 +92,7 @@ Sets the leader key to `<Space>`, disables netrw (in favor of Neo-tree), and loa
 
 - System clipboard integration (`unnamedplus`)
 - Opaque popups/floats (`pumblend=0`, `winblend=0`)
-- Transparent main editor background with opaque floating windows
+- Transparent main editor background and snacks.nvim picker/explorer elements (with other floating windows kept opaque)
 - Dark background mode
 - Extra sign column padding
 
@@ -111,14 +111,16 @@ Bootstraps [lazy.nvim](https://github.com/folke/lazy.nvim) from GitHub, imports 
 | `stevearc/conform.nvim`           | `conform.lua`          | Formatting: stylua, prettierd, clang-format                  |
 | `github/copilot.vim`              | `copilot.lua`          | Inline AI ghost-text completions                             |
 | `ibhagwan/fzf-lua`                | `fzf-lua.lua`          | Fuzzy finder with custom fzf binary                          |
+| `ajbucci/ipynb.nvim`              | `ipynb.lua`            | Jupyter Notebook support with interactive cell execution     |
 | `mfussenegger/nvim-lint`          | `lint.lua`             | Async linting with eslint_d                                  |
 | `barrettruth/live-server.nvim`    | `live-server.nvim.lua` | Live web development preview                                 |
 | `neovim/nvim-lspconfig`           | `lsp.lua`              | LSP: lua_ls, pyright, clangd, ts_ls, eslint, emmet, ast_grep |
 | `nvim-lualine/lualine.nvim`       | `lualine.lua`          | Statusline (auto theme)                                      |
-| `nvim-neo-tree/neo-tree.nvim`     | `neo-tree.lua`         | File explorer (transparent bg, auto-open on dirs)            |
+| `nvim-neo-tree/neo-tree.nvim`     | `neo-tree.lua`         | File explorer (disabled, replaced by snacks.explorer)        |
 | `David-Kunz/gen.nvim`             | `ollama.lua`           | Ollama chat (qwen2.5-coder:7b)                               |
 | `milanglacier/minuet-ai.nvim`     | `ollama.lua`           | Ollama inline completions                                    |
 | `CRAG666/code_runner.nvim`        | `runner.lua`           | Input/Output buffer-based code execution                     |
+| `folke/snacks.nvim`               | `snacks.lua`           | Core utilities & File Explorer (picker & explorer transparency enabled)|
 | `nvim-telescope/telescope.nvim`   | `telescope.lua`        | Fuzzy finder + ast-grep extension                            |
 | `catppuccin/nvim`                 | `theme.lua`            | Catppuccin Mocha colorscheme                                 |
 | `nvim-treesitter/nvim-treesitter` | `treesitter.lua`       | Syntax highlighting / parsing                                |
@@ -246,6 +248,22 @@ Copilot's default `<Tab>` mapping is disabled; use `<C-J>` to accept suggestions
 | ------------ | ------ | ---------------------------------------- |
 | `<leader>rr` | Normal | Save and run code (using current mode)   |
 | `<leader>rt` | Normal | Toggle Code Runner mode (Buffer/Terminal)|
+
+### Jupyter Notebook (`ipynb.nvim`)
+
+| Key          | Mode   | Action                                     |
+| ------------ | ------ | ------------------------------------------ |
+| `<leader>jx` | Normal | Execute cell, stay                         |
+| `<leader>jX` | Normal | Execute cell, move next                    |
+| `<leader>js` | Normal | Start Jupyter kernel                       |
+| `<leader>j0` | Normal | Restart Jupyter kernel                     |
+| `<leader>jc` | Normal | Clear cell output                          |
+| `<leader>jC` | Normal | Clear all outputs                          |
+| `<leader>jo` | Normal | Open output window                         |
+| `<leader>jn` | Normal | Show kernel status                         |
+| `<leader>jh` | Normal | Inspect variable at cursor                 |
+| `<leader>ja` | Normal | Insert cell above                          |
+| `<leader>jb` | Normal | Insert cell below                          |
 
 ### Debugging
 

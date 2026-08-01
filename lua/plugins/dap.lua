@@ -30,6 +30,7 @@ return {
 			virtual_text.setup({})
 
 			-- Initialize DAP UI
+			---@diagnostic disable-next-line: missing-fields
 			dapui.setup({
 				layouts = {
 					{
@@ -183,25 +184,7 @@ return {
 				},
 			}
 
-			-- --- Keymaps (All with `desc` for Which-Key visualization) ---
-			local keymap = vim.keymap.set
-			local opts = { silent = true }
-
-			keymap("n", "<leader>db", dap.toggle_breakpoint, { desc = "DAP: Toggle Breakpoint" })
-			keymap("n", "<leader>dB", function()
-				vim.ui.input({ prompt = "Breakpoint condition: " }, function(input)
-					if input and input ~= "" then
-						dap.set_breakpoint(input)
-					end
-				end)
-			end, { desc = "DAP: Conditional Breakpoint" })
-			keymap("n", "<leader>dc", dap.continue, { desc = "DAP: Continue / Start" })
-			keymap("n", "<leader>di", dap.step_into, { desc = "DAP: Step Into" })
-			keymap("n", "<leader>do", dap.step_over, { desc = "DAP: Step Over" })
-			keymap("n", "<leader>dO", dap.step_out, { desc = "DAP: Step Out" })
-			keymap("n", "<leader>dt", dap.terminate, { desc = "DAP: Terminate" })
-			keymap("n", "<leader>du", dapui.toggle, { desc = "DAP: Toggle Debug UI" })
-			keymap("n", "<leader>de", dapui.eval, { desc = "DAP: Evaluate variable under cursor" })
+			-- Keymaps have been moved to lua/keymaps.lua
 		end,
 	},
 }

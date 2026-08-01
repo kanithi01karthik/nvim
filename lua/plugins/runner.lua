@@ -234,7 +234,7 @@ return {
 					)
 					run_code(cmd)
 				end,
-				py = function()
+				python = function()
 					local dir = vim.fn.expand("%:p:h")
 					local fileName = vim.fn.expand("%:t")
 					local cmd =

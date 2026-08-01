@@ -5,6 +5,9 @@
 vim.opt.wildignorecase = true
 vim.opt.signcolumn = "yes:1" -- extra column padding beyond LazyVim default
 
+-- Disable terminal synchronized updates to prevent vertical split rendering/scroll glitches in WezTerm
+vim.opt.termsync = false
+
 -- Use the OS clipboard for yanks/pastes in both directions (+ register).
 vim.opt.clipboard = "unnamedplus"
 
@@ -24,6 +27,18 @@ local function set_ui_opacity()
 	vim.api.nvim_set_hl(0, "FloatBorder", { bg = float_bg })
 	vim.api.nvim_set_hl(0, "Pmenu", { bg = float_bg })
 	vim.api.nvim_set_hl(0, "PmenuSel", { bg = float_bg })
+
+	-- Add transparency to snacks.nvim picker/explorer elements
+	vim.api.nvim_set_hl(0, "SnacksNormal", { bg = "none", ctermbg = "none" })
+	vim.api.nvim_set_hl(0, "SnacksNormalNC", { bg = "none", ctermbg = "none" })
+	vim.api.nvim_set_hl(0, "SnacksBorder", { bg = "none", ctermbg = "none" })
+	vim.api.nvim_set_hl(0, "SnacksTitle", { bg = "none", ctermbg = "none" })
+	vim.api.nvim_set_hl(0, "SnacksBackdrop", { bg = "none", ctermbg = "none" })
+	vim.api.nvim_set_hl(0, "SnacksPicker", { bg = "none", ctermbg = "none" })
+	vim.api.nvim_set_hl(0, "SnacksPickerBorder", { bg = "none", ctermbg = "none" })
+	vim.api.nvim_set_hl(0, "SnacksPickerList", { bg = "none", ctermbg = "none" })
+	vim.api.nvim_set_hl(0, "SnacksPickerInput", { bg = "none", ctermbg = "none" })
+	vim.api.nvim_set_hl(0, "SnacksPickerPreview", { bg = "none", ctermbg = "none" })
 end
 
 vim.api.nvim_create_autocmd("ColorScheme", {

@@ -42,11 +42,12 @@ end, { desc = "Search text in files" })
 local telescope = require("utils.telescope")
 vim.keymap.set("n", "<leader>ag", telescope.extension("ast_grep", "ast_grep"), { desc = "Telescope ast-grep" })
 -- ╭─────────────────────────────────────╮
--- │           Neo-tree / Oil            │
+-- │           Snacks Explorer           │
 -- ╰─────────────────────────────────────╯
--- LazyVim maps <leader>e / <leader>E for neo-tree.
 -- <C-n> is kept as an additional personal shortcut.
-vim.keymap.set("n", "<C-n>", ":Neotree toggle<CR>", { desc = "Toggle Neo-tree" })
+vim.keymap.set("n", "<C-n>", function()
+	Snacks.explorer()
+end, { desc = "Toggle Snacks Explorer" })
 
 -- Key debug: capture raw bytes for a pressed key (useful for diagnosing Ctrl sequences)
 vim.keymap.set("n", "<leader>kk", require("utils.keydebug").capture, { desc = "Capture raw key bytes" })
@@ -113,3 +114,39 @@ vim.keymap.set("n", "<leader>sx", ":close<CR>", { desc = "Close current split", 
 vim.keymap.set("v", "<", "<gv", { desc = "Indent block left", silent = true })
 vim.keymap.set("v", ">", ">gv", { desc = "Indent block right", silent = true })
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode", silent = true })
+
+-- ╭─────────────────────────────────────╮
+-- │          Plugin Keymaps             │
+-- ╰─────────────────────────────────────╯
+-- Jupyter Notebooks (ipynb.nvim)
+vim.keymap.set("n", "<leader>jx", "<cmd>NotebookExecuteCell<cr>", { desc = "Execute cell, stay" })
+vim.keymap.set("n", "<leader>jX", "<cmd>NotebookExecuteAndNext<cr>", { desc = "Execute cell, move next" })
+vim.keymap.set("n", "<leader>js", "<cmd>NotebookKernelStart<cr>", { desc = "Start kernel" })
+vim.keymap.set("n", "<leader>j0", "<cmd>NotebookKernelRestart<cr>", { desc = "Restart kernel" })
+vim.keymap.set("n", "<leader>jc", "<cmd>NotebookClearOutput<cr>", { desc = "Clear cell output" })
+vim.keymap.set("n", "<leader>jC", "<cmd>NotebookClearAllOutputs<cr>", { desc = "Clear all outputs" })
+vim.keymap.set("n", "<leader>jo", "<cmd>NotebookOutput<cr>", { desc = "Open output window" })
+vim.keymap.set("n", "<leader>jn", "<cmd>NotebookKernelStatus<cr>", { desc = "Show kernel status" })
+vim.keymap.set("n", "<leader>jh", "<cmd>NotebookInspect<cr>", { desc = "Inspect variable at cursor" })
+vim.keymap.set("n", "<leader>ja", "<cmd>NotebookInsertCellAbove<cr>", { desc = "Insert cell above" })
+vim.keymap.set("n", "<leader>jb", "<cmd>NotebookInsertCellBelow<cr>", { desc = "Insert cell below" })
+
+-- Clangd (C/C++)
+vim.keymap.set("n", "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", { desc = "Switch Source/Header (C/C++)" })
+
+-- DAP (Debugger)
+vim.keymap.set("n", "<leader>db", function() require("dap").toggle_breakpoint() end, { desc = "DAP: Toggle Breakpoint" })
+vim.keymap.set("n", "<leader>dB", function()
+	vim.ui.input({ prompt = "Breakpoint condition: " }, function(input)
+		if input and input ~= "" then
+			require("dap").set_breakpoint(input)
+		end
+	end)
+end, { desc = "DAP: Conditional Breakpoint" })
+vim.keymap.set("n", "<leader>dc", function() require("dap").continue() end, { desc = "DAP: Continue / Start" })
+vim.keymap.set("n", "<leader>di", function() require("dap").step_into() end, { desc = "DAP: Step Into" })
+vim.keymap.set("n", "<leader>do", function() require("dap").step_over() end, { desc = "DAP: Step Over" })
+vim.keymap.set("n", "<leader>dO", function() require("dap").step_out() end, { desc = "DAP: Step Out" })
+vim.keymap.set("n", "<leader>dt", function() require("dap").terminate() end, { desc = "DAP: Terminate" })
+vim.keymap.set("n", "<leader>du", function() require("dapui").toggle() end, { desc = "DAP: Toggle Debug UI" })
+vim.keymap.set("n", "<leader>de", function() require("dapui").eval() end, { desc = "DAP: Evaluate variable under cursor" })

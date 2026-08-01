@@ -64,12 +64,42 @@ return {
 						showSuggestionsAsSnippets = true,
 					},
 				},
-				ts_ls = {},
+				ts_ls = {
+					on_attach = function(client, bufnr)
+						local fname = vim.api.nvim_buf_get_name(bufnr)
+						if fname:match("%.test%.js$") or fname:match("%.spec%.js$") or fname:match("%.test%.ts$") or fname:match("%.spec%.ts$") then
+							local root = client.config.root_dir
+							if root then
+								local pkg_path = root .. "/package.json"
+								local f = io.open(pkg_path, "r")
+								if f then
+									local content = f:read("*a")
+									f:close()
+									local ok, pkg = pcall(vim.json.decode, content)
+									if ok and pkg then
+										local has_jest = (pkg.dependencies and pkg.dependencies.jest) or (pkg.devDependencies and pkg.devDependencies.jest)
+										if has_jest then
+											local has_types = (pkg.devDependencies and pkg.devDependencies["@types/jest"]) or (pkg.dependencies and pkg.dependencies["@types/jest"])
+											local types_dir = root .. "/node_modules/@types/jest"
+											local types_exists = vim.loop.fs_stat(types_dir) ~= nil
+											if not (has_types or types_exists) then
+												vim.schedule(function()
+													vim.notify(
+														"Jest is installed, but @types/jest is missing. Run `npm install --save-dev @types/jest` to get Jest auto-suggestions.",
+														vim.log.levels.WARN,
+														{ title = "LSP: Jest Types" }
+													)
+												end)
+											end
+										end
+									end
+								end
+							end
+						end
+					end,
+				},
 				eslint = {},
 				clangd = {
-					keys = {
-						{ "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
-					},
 					capabilities = {
 						offsetEncoding = { "utf-16" },
 					},
