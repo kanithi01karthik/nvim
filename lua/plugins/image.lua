@@ -1,7 +1,7 @@
 return {
 	"3rd/image.nvim",
 	opts = {
-		backend = "kitty",
+		backend = "sixel",
 		integrations = {
 			markdown = {
 				enabled = true,
