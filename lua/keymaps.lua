@@ -118,18 +118,14 @@ vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode", 
 -- ╭─────────────────────────────────────╮
 -- │          Plugin Keymaps             │
 -- ╰─────────────────────────────────────╯
--- Jupyter Notebooks (ipynb.nvim)
-vim.keymap.set("n", "<leader>jx", "<cmd>NotebookExecuteCell<cr>", { desc = "Execute cell, stay" })
-vim.keymap.set("n", "<leader>jX", "<cmd>NotebookExecuteAndNext<cr>", { desc = "Execute cell, move next" })
-vim.keymap.set("n", "<leader>js", "<cmd>NotebookKernelStart<cr>", { desc = "Start kernel" })
-vim.keymap.set("n", "<leader>j0", "<cmd>NotebookKernelRestart<cr>", { desc = "Restart kernel" })
-vim.keymap.set("n", "<leader>jc", "<cmd>NotebookClearOutput<cr>", { desc = "Clear cell output" })
-vim.keymap.set("n", "<leader>jC", "<cmd>NotebookClearAllOutputs<cr>", { desc = "Clear all outputs" })
-vim.keymap.set("n", "<leader>jo", "<cmd>NotebookOutput<cr>", { desc = "Open output window" })
-vim.keymap.set("n", "<leader>jn", "<cmd>NotebookKernelStatus<cr>", { desc = "Show kernel status" })
-vim.keymap.set("n", "<leader>jh", "<cmd>NotebookInspect<cr>", { desc = "Inspect variable at cursor" })
-vim.keymap.set("n", "<leader>ja", "<cmd>NotebookInsertCellAbove<cr>", { desc = "Insert cell above" })
-vim.keymap.set("n", "<leader>jb", "<cmd>NotebookInsertCellBelow<cr>", { desc = "Insert cell below" })
+-- Jupyter Notebooks (Molten)
+vim.keymap.set("n", "<leader>js", ":MoltenInit<CR>", { desc = "Initialize the plugin", silent = true })
+vim.keymap.set("n", "<leader>jx", ":MoltenEvaluateOperator<CR>", { desc = "Run operator selection", silent = true })
+vim.keymap.set("n", "<leader>jl", ":MoltenEvaluateLine<CR>", { desc = "Evaluate line", silent = true })
+vim.keymap.set("n", "<leader>jc", ":MoltenReevaluateCell<CR>", { desc = "Re-evaluate cell", silent = true })
+vim.keymap.set("v", "<leader>j", ":<C-u>MoltenEvaluateVisual<CR>gv", { desc = "Evaluate visual selection", silent = true })
+vim.keymap.set("n", "<leader>jd", ":MoltenDelete<CR>", { desc = "Molten Delete cell", silent = true })
+vim.keymap.set("n", "<leader>jo", ":MoltenShowOutput<CR>", { desc = "Show output window", silent = true })
 
 -- Clangd (C/C++)
 vim.keymap.set("n", "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", { desc = "Switch Source/Header (C/C++)" })

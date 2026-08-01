@@ -111,7 +111,8 @@ Bootstraps [lazy.nvim](https://github.com/folke/lazy.nvim) from GitHub, imports 
 | `stevearc/conform.nvim`           | `conform.lua`          | Formatting: stylua, prettierd, clang-format                  |
 | `github/copilot.vim`              | `copilot.lua`          | Inline AI ghost-text completions                             |
 | `ibhagwan/fzf-lua`                | `fzf-lua.lua`          | Fuzzy finder with custom fzf binary                          |
-| `ajbucci/ipynb.nvim`              | `ipynb.lua`            | Jupyter Notebook support with interactive cell execution     |
+| `benlubas/molten-nvim`            | `molten.lua`           | Jupyter Notebook support with inline image rendering         |
+| `3rd/image.nvim`                  | `image.lua`            | Inline image rendering using WezTerm Kitty protocol          |
 | `mfussenegger/nvim-lint`          | `lint.lua`             | Async linting with eslint_d                                  |
 | `barrettruth/live-server.nvim`    | `live-server.nvim.lua` | Live web development preview                                 |
 | `neovim/nvim-lspconfig`           | `lsp.lua`              | LSP: lua_ls, pyright, clangd, ts_ls, eslint, emmet, ast_grep |
@@ -249,21 +250,17 @@ Copilot's default `<Tab>` mapping is disabled; use `<C-J>` to accept suggestions
 | `<leader>rr` | Normal | Save and run code (using current mode)   |
 | `<leader>rt` | Normal | Toggle Code Runner mode (Buffer/Terminal)|
 
-### Jupyter Notebook (`ipynb.nvim`)
+### Jupyter Notebook (`molten-nvim`)
 
 | Key          | Mode   | Action                                     |
 | ------------ | ------ | ------------------------------------------ |
-| `<leader>jx` | Normal | Execute cell, stay                         |
-| `<leader>jX` | Normal | Execute cell, move next                    |
-| `<leader>js` | Normal | Start Jupyter kernel                       |
-| `<leader>j0` | Normal | Restart Jupyter kernel                     |
-| `<leader>jc` | Normal | Clear cell output                          |
-| `<leader>jC` | Normal | Clear all outputs                          |
-| `<leader>jo` | Normal | Open output window                         |
-| `<leader>jn` | Normal | Show kernel status                         |
-| `<leader>jh` | Normal | Inspect variable at cursor                 |
-| `<leader>ja` | Normal | Insert cell above                          |
-| `<leader>jb` | Normal | Insert cell below                          |
+| `<leader>js` | Normal | Initialize the plugin                      |
+| `<leader>jx` | Normal | Run operator selection                     |
+| `<leader>jl` | Normal | Evaluate line                              |
+| `<leader>jc` | Normal | Re-evaluate cell                           |
+| `<leader>j`  | Visual | Evaluate visual selection                  |
+| `<leader>jd` | Normal | Molten Delete cell                         |
+| `<leader>jo` | Normal | Show output window                         |
 
 ### Debugging
 
